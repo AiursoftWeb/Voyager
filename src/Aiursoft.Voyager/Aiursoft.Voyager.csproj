@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Version>9.0.1</Version>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>Voyager</AssemblyName>
+    <RootNamespace>Aiursoft.Voyager</RootNamespace>
+    <IsTestProject>false</IsTestProject>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>Voyager</ToolCommandName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SelfContained>false</SelfContained>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <PublishSingleFile>false</PublishSingleFile>
+    <Company>Aiursoft</Company>
+    <Product>Voyager</Product>
+    <Authors>edgeneko anduin2017</Authors>
+    <Description>A cli tool helps you to de-duplicate images in a folder.</Description>
+    <PackageId>Aiursoft.Voyager</PackageId>
+    <PackageTags>cli nuget dotnet tool image deduplication</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://gitlab.aiursoft.cn/Aiursoft/Voyager</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://gitlab.aiursoft.cn/Aiursoft/Voyager</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="." />
+    <ProjectReference Include="..\Aiursoft.Voyager.Dedup\Aiursoft.Voyager.Dedup.csproj" />
+  </ItemGroup>
+</Project>
