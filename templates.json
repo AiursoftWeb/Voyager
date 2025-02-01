@@ -3,6 +3,7 @@
     "ShortName": "dotnet-cli-tool",
     "FullName": ".NET CLI global CLI application",
     "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/httping.git",
+    "Branch": "master",
     "ProjectOrg": "Aiursoft",
     "ProjectName": "Httping"
   }

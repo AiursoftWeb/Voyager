@@ -1,5 +1,6 @@
 using Aiursoft.Canon;
 using Aiursoft.CommandFramework.Abstracts;
+using Aiursoft.GitRunner;
 using Aiursoft.Voyager.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,7 @@ public class Startup : IStartUp
     {
         services.AddTaskCanon();
         services.AddHttpClient();
+        services.AddGitRunner();
         services.AddScoped<VoyagerHttpClient>();
         services.AddScoped<NewWorker>();
     }
