@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Aiursoft.CSTools.Tools;
 using Aiursoft.GitRunner;
 using Aiursoft.GitRunner.Models;
 using Aiursoft.Voyager.Models;
@@ -165,24 +166,5 @@ public class NewWorker(
     private bool IsValidOrgOrProjName(string name)
     {
         return Regex.IsMatch(name, @"^[a-zA-Z0-9_.-]+$");
-    }
-}
-
-public static class StringExtentions
-{
-    public static string ReplaceWithUpperLowerRespect(this string content, string source, string target)
-    {
-        if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(source))
-            return content;
-
-        return Regex.Replace(content, Regex.Escape(source), match =>
-        {
-            if (!string.IsNullOrEmpty(match.Value) && char.IsUpper(match.Value[0]))
-            {
-                return target;
-            }
-
-            return char.ToLower(target[0]) + (target.Length > 1 ? target.Substring(1) : string.Empty);
-        }, RegexOptions.IgnoreCase);
     }
 }
