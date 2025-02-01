@@ -6,7 +6,7 @@
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.Voyager.svg)](https://www.nuget.org/packages/Aiursoft.Voyager/)
 [![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/Voyager.svg)](https://gitlab.aiursoft.cn/aiursoft/Voyager/-/commits/master?ref_type=heads)
 
-A cli tool helps you to de-duplicate images in a folder.
+A cli tool helps you create new projects with a template.
 
 ## Install
 
@@ -25,62 +25,49 @@ dotnet tool install --global Aiursoft.Voyager
 After getting the binary, run it directly in the terminal.
 
 ```bash
-$ Voyager dedup
-Option '--path' is required.
+anduin@anduin-lunar:~/Temp$ ~/.dotnet/tools/voyager new
 
 Description:
-  De-duplicate images in a folder.
+  Create a new project based on a template.
 
 Usage:
-  Voyager dedup [options]
+  voyager new [options]
 
 Options:
-  -p, --path <path> (REQUIRED)                  Path of the folder to dedup.
-  -ds, --duplicate-similar <duplicate-similar>  Similarity bar. This value means two image are considered as duplicates if their similarity is greater than it. Setting too small may cause different images to be considered as 
-                                                duplicates. Suggested values: [96-100] [default: 96]
-  -r, --recursive                               Recursively search for similar images in subdirectories. [default: False]
-  -k, --keep <keep>                             Preference for sorting images by quality to determine which to keep when duplicates are found. Available options: 
-                                                Colorful|GrayScale|Newest|Oldest|Smallest|Largest|HighestResolution|LowestResolution. [default: Colorful|HighestResolution|Largest|Newest]
-  -a, --action <Delete|MoveToTrash|Nothing>     Action to take when duplicates are found. Available options: Nothing, Delete, MoveToTrash. [default: MoveToTrash]
-  -y, --yes                                     No interactive mode. Taking action without asking for confirmation. [default: False]
-  -e, --extensions <extensions>                 Extensions of files to dedup. [default: jpg|jpeg|png|jfif]
-  -t, --threads <threads>                       Number of threads to use for image indexing. Default is 32. [default: 32]
-  -v, --verbose                                 Show detailed log
-  -?, -h, --help                                Show help and usage information
+  --path <path>                                               The path to the project. [default: .]
+  -t, --template-short-name <template-short-name> (REQUIRED)  The short name of the template to use. Run `voyager list` to see all available templates.
+  -p, --templates-endpoint <templates-endpoint>               The endpoint to fetch templates from. [default: https://gitlab.aiursoft.cn/aiursoft/voyager/-/raw/master/templates.json]
+  -n, --name <name>                                           The name of the new project. [default: Temp]
+  -v, --verbose                                               Show detailed log
+  -?, -h, --help                                              Show help and usage information
+
+
+anduin@anduin-lunar:~/Temp$ ~/.dotnet/tools/voyager list
+Template 'class-library' from Aiursoft/GitRunner:
+  - Full name: Class Library, with unit test project
+
+Template 'dotnet-cli-tool-simple' from Aiursoft/Httping:
+  - Full name: .NET CLI global CLI application, single command.
+
+Template 'dotnet-cli-tool-configuration' from Anduin/HappyRecorder:
+  - Full name: .NET CLI global CLI application, multiple commands, with configuration system
+
+Template 'dotnet-cli-tool-service' from Aiursoft/Static:
+  - Full name: .NET CLI global CLI application, running with host service
+
+Template 'web-app-simple' from Aiursoft/Tracer:
+  - Full name: ASP.NET Core Web Application, with front-end packages and simple back-end
+
+Template 'web-app-database-crud' from Anduin/FlyClass:
+  - Full name: ASP.NET Core Web Application, with database and CRUD operations
+
+Template 'web-app-storage' from Aiursoft/AiurDrive:
+  - Full name: ASP.NET Core Web Application, with user uploading and stroage service
+
+Template 'web-app-client-sdk' from Aiursoft/StatHub:
+  - Full name: ASP.NET Core Web Application, with client side application and SDK
+
 ```
-
-It will fetch all images in the folder and compare them with each other. If two images are similar enough, it will consider them as duplicates. 
-
-It will pick the best one based the `--keep` option. If the `--action` is set to `Delete`, it will delete the rest of the duplicates. If the `--action` is set to `MoveToTrash`, it will move the rest of the duplicates to the trash.
-
-With the `--interactive` option, it will preview each photo and ask for confirmation before deleting files.
-
-## Install as a Class Library
-
-You can also install this tool as a class library. 
-
-```bash
-dotnet add package Aiursoft.Voyager.Core
-```
-
-Then you can use the `DedupEngine` class to de-duplicate images in your own code.
-
-```csharp
-    services.AddLogging(builder =>
-    {
-        builder.AddConsole();
-        builder.AddDebug();
-    });
-    services.AddTransient<DedupEngine>();
-    services.AddTransient<ImageHasher>();
-    services.AddTransient<BestPhotoSelector>();
-    services.AddTransient<FilesHelper>();
-    services.AddTaskCanon();
-    var sp = services.BuildServiceProvider();
-    var dedupEngine = sp.GetRequiredService<DedupEngine>();
-```
-
-That's it!
 
 ## How to contribute
 
