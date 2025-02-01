@@ -19,7 +19,7 @@
     <Company>Aiursoft</Company>
     <Product>Voyager</Product>
     <Authors>edgeneko anduin2017</Authors>
-    <Description>A cli tool helps you creating new projects with a template.</Description>
+    <Description>A cli tool helps you create new projects with a template.</Description>
     <PackageId>Aiursoft.Voyager</PackageId>
     <PackageTags>cli nuget dotnet tool new project template</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
