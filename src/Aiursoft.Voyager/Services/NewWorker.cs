@@ -54,6 +54,14 @@ public class NewWorker(
         {
             logger.LogWarning("The .git folder not found at {path}", path);
         }
+        
+        // Get new Organization and Project name
+        // If newProjectName contains ".", then the last part should be the project name. Example: Microsoft.M365.Excel, Microsoft.M365 is the organization name, Excel is the project name.
+        // If newProjectName doesn't contain ".", then the whole name should be the project name and the organization name. Example, input: Temp. Then organization name and project name are both Temp.
+        var parts = newProjectName.Split('.');
+        var orgName = parts.Length > 1 ? string.Join('.', parts.Take(parts.Length - 1)) : newProjectName;
+        var projName = parts.Last();
+        logger.LogTrace("Organization name: {orgName}, Project name: {projName}", orgName, projName);
     }
 
     public async Task ListTemplates(string endPoint)
