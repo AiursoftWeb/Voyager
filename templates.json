@@ -73,6 +73,10 @@
     {
       "Extension": ".csproj",
       "DontReplaceWhenLineContains": "PackageReference"
+    },
+    {
+      "Extension": ".config",
+      "DontReplaceWhenLineContains": "<add"
     }
   ]
 }
