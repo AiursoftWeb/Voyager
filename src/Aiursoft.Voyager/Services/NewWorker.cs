@@ -7,7 +7,7 @@ public class NewWorker(
     ILogger<NewWorker> logger,
     VoyagerHttpClient httpClient)
 {
-    public async Task CreateProject(string name, string endPoint, string newProjectName)
+    public async Task CreateProject(string path, string name, string endPoint, string newProjectName)
     {
         logger.LogTrace("Listing templates from {endPoint}", endPoint);
         var templates = await httpClient.Get<List<Template>>(endPoint);
@@ -18,7 +18,7 @@ public class NewWorker(
         {
             throw new InvalidOperationException($"Template '{name}' not found. Please run 'voyager list' to see all available templates.");
         }
-        logger.LogInformation("Creating project {newProjectName} from template {name}", newProjectName, name);
+        logger.LogInformation("Creating project {newProjectName} at {path} from template {name}", newProjectName, path, name);
     }
 
     public async Task ListTemplates(string endPoint)

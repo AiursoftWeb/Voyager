@@ -17,6 +17,7 @@ public class NewHandler : ExecutableCommandHandlerBuilder
 
     protected override Option[] GetCommandOptions() =>
     [
+        OptionsProvider.PathOption,
         OptionsProvider.TemplateOption,
         OptionsProvider.TemplatesEndpoint,
         OptionsProvider.NewProjectNameOption,
@@ -25,11 +26,13 @@ public class NewHandler : ExecutableCommandHandlerBuilder
     
     protected override async Task Execute(InvocationContext context)
     {
+        var path = context.ParseResult.GetValueForOption(OptionsProvider.PathOption)!;
         var name = context.ParseResult.GetValueForOption(OptionsProvider.TemplateOption)!;
         var endPoint = context.ParseResult.GetValueForOption(OptionsProvider.TemplatesEndpoint)!;
         var newProjectName = context.ParseResult.GetValueForOption(OptionsProvider.NewProjectNameOption)!;
         var verbose = context.ParseResult.GetValueForOption(CommonOptionsProvider.VerboseOption);
-
+        
+        var contentRoot = Path.GetFullPath(path);
         var host = ServiceBuilder
             .CreateCommandHostBuilder<Startup>(verbose)
             .Build();
@@ -37,6 +40,6 @@ public class NewHandler : ExecutableCommandHandlerBuilder
         await host.StartAsync();
 
         var newWorker = host.Services.GetRequiredService<NewWorker>();
-        await newWorker.CreateProject(name, endPoint, newProjectName);
+        await newWorker.CreateProject(contentRoot, name, endPoint, newProjectName);
     }
 }

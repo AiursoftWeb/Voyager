@@ -4,6 +4,14 @@ namespace Aiursoft.Voyager;
 
 public class OptionsProvider
 {
+    public static readonly Option<string> PathOption = new(
+        name: "--path",
+        getDefaultValue: () => ".",
+        description: "The path to the project.")
+    {
+        IsRequired = false,
+    };
+
     public static readonly Option<string> TemplateOption = new(
         aliases: ["--template-short-name", "-t"],
         description: "The short name of the template to use. Run `voyager list` to see all available templates.")
