@@ -40,8 +40,17 @@ Options:
   -n, --name <name>                                           The name of the new project. [default: Temp]
   -v, --verbose                                               Show detailed log
   -?, -h, --help                                              Show help and usage information
+```
 
+To create a new project, run the following command:
 
+```bash
+anduin@anduin-lunar:~/Temp$ ~/.dotnet/tools/voyager new -t web-app-simple
+```
+
+To list all available templates, run the following command:
+
+```bash
 anduin@anduin-lunar:~/Temp$ ~/.dotnet/tools/voyager list
 Template 'class-library' from Aiursoft/GitRunner:
   - Full name: Class Library, with unit test project
