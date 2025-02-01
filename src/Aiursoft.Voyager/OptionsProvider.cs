@@ -29,7 +29,12 @@ public class OptionsProvider
     
     public static readonly Option<string> NewProjectNameOption = new(
         aliases: ["--name", "-n"],
-        getDefaultValue: () => new DirectoryInfo(Directory.GetCurrentDirectory()).Name,
+        getDefaultValue: () =>
+        {
+            var name = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
+            Console.WriteLine($"Didn't pass the argument '-n', using the current directory name '{name}' as the project name.");
+            return name;
+        },
         description: "The name of the new project.")
     {
         IsRequired = false,
