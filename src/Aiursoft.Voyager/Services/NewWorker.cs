@@ -20,7 +20,8 @@ public class NewWorker(
         var templates = await httpClient.Get<List<Template>>(endPoint);
         foreach (var template in templates)
         {
-            logger.LogInformation("Template {shortName} from {projectOrg}/{projectName}", template.ShortName, template.ProjectOrg, template.ProjectName);
+            Console.WriteLine($"Template '{template.ShortName}' from {template.ProjectOrg}/{template.ProjectName}:");
+            Console.WriteLine($"  - Full name: {template.FullName}");
             logger.LogTrace("Git repo clone url: {gitRepoCloneUrl}", template.GitRepoCloneUrl);
         }
     }
