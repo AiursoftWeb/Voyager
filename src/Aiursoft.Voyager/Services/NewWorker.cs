@@ -15,8 +15,8 @@ public class NewWorker(
     public async Task CreateProject(string path, string name, string endPoint, string newProjectName)
     {
         logger.LogTrace("Listing templates from {endPoint}", endPoint);
-        var templates = await httpClient.Get<List<Template>>(endPoint);
-        var template = templates.FirstOrDefault(t =>
+        var templates = await httpClient.Get<Template>(endPoint);
+        var template = templates.Projects.FirstOrDefault(t =>
             string.Equals(t.ShortName, name, StringComparison.OrdinalIgnoreCase) ||
             string.Equals(t.FullName, name, StringComparison.OrdinalIgnoreCase));
         if (template is null)
@@ -75,15 +75,15 @@ public class NewWorker(
         logger.LogTrace("Organization name: {orgName}, Project name: {projName}", orgName, projName);
 
         // Replace the template.ProjectOrg to orgName and template.ProjectName to projName
-        await ReplaceEveryString(path, template.ProjectOrg, orgName);
-        await ReplaceEveryString(path, template.ProjectName, projName);
+        await ReplaceEveryString(path, template.ProjectOrg, orgName, templates.Rules);
+        await ReplaceEveryString(path, template.ProjectName, projName, templates.Rules);
     }
 
     public async Task ListTemplates(string endPoint)
     {
         logger.LogTrace("Listing templates from {endPoint}", endPoint);
-        var templates = await httpClient.Get<List<Template>>(endPoint);
-        foreach (var template in templates)
+        var templates = await httpClient.Get<Template>(endPoint);
+        foreach (var template in templates.Projects)
         {
             Console.WriteLine($"Template '{template.ShortName}' from {template.ProjectOrg}/{template.ProjectName}:");
             Console.WriteLine($"  - Full name: {template.FullName}\n");
@@ -91,24 +91,47 @@ public class NewWorker(
         }
     }
 
-    private async Task ReplaceEveryString(string path, string source, string target)
+    private async Task ReplaceEveryString(string path, string source, string target, IReadOnlyCollection<Rule> rules)
     {
-        await ReplaceInAllFiles(path, source, target);
+        await ReplaceInAllFiles(path, source, target, rules);
         await ReplaceFolderNames(path, source, target);
         await ReplaceAllFileNames(path, source, target);
     }
 
-    private async Task ReplaceInAllFiles(string path, string source, string target)
+    private async Task ReplaceInAllFiles(string path, string source, string target, IReadOnlyCollection<Rule> rules)
     {
         var files = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
         foreach (var file in files)
         {
-            logger.LogTrace("Replacing content in {file}, from {source} to {target}.", file, source, target);
-            var content = await File.ReadAllTextAsync(file);
-            content = content.ReplaceWithUpperLowerRespect(source, target);
-            await File.WriteAllTextAsync(file, content);
+            logger.LogTrace("Processing file {file} for replacement from {source} to {target}.", file, source, target);
+            var fileExtension = Path.GetExtension(file);
+            var applicableRules = rules
+                .Where(rule => string.Equals(rule.Extension, fileExtension, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (applicableRules.Count != 0)
+            {
+                var lines = await File.ReadAllLinesAsync(file);
+                for (var i = 0; i < lines.Length; i++)
+                {
+                    var skipReplacement = applicableRules.Any(rule => lines[i].Contains(rule.DontReplaceWhenLineContains));
+                    if (!skipReplacement)
+                    {
+                        lines[i] = lines[i].ReplaceWithUpperLowerRespect(source, target);
+                    }
+                }
+                await File.WriteAllLinesAsync(file, lines);
+            }
+            else
+            {
+                // 如果文件扩展名未命中任何规则，则整体替换
+                var content = await File.ReadAllTextAsync(file);
+                content = content.ReplaceWithUpperLowerRespect(source, target);
+                await File.WriteAllTextAsync(file, content);
+            }
         }
     }
+
 
     private Task ReplaceFolderNames(string root, string source, string target)
     {
