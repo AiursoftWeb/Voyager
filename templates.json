@@ -1,0 +1,8 @@
+[
+  {
+    "ShortName": "cli-tool",
+    "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/httping.git",
+    "ProjectOrg": "Aiursoft",
+    "ProjectName": "Httping"
+  }
+]

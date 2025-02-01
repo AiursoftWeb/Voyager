@@ -10,11 +10,13 @@ public class NewWorker(
     public async Task CreateProject(string name, string endPoint, string newProjectName)
     {
         logger.LogTrace("Creating project {name} from {endPoint} to {newProjectName}", name, endPoint, newProjectName);
+        logger.LogTrace("Listing templates from {endPoint}", endPoint);
         await Task.CompletedTask;
     }
 
     public async Task ListTemplates(string endPoint)
     {
+        logger.LogTrace("Listing templates from {endPoint}", endPoint);
         var templates = await httpClient.Get<List<Template>>(endPoint);
         foreach (var template in templates)
         {
