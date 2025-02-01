@@ -9,9 +9,16 @@ public class NewWorker(
 {
     public async Task CreateProject(string name, string endPoint, string newProjectName)
     {
-        logger.LogTrace("Creating project {name} from {endPoint} to {newProjectName}", name, endPoint, newProjectName);
         logger.LogTrace("Listing templates from {endPoint}", endPoint);
-        await Task.CompletedTask;
+        var templates = await httpClient.Get<List<Template>>(endPoint);
+        var template = templates.FirstOrDefault(t => 
+            string.Equals(t.ShortName, name, StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(t.FullName, name, StringComparison.OrdinalIgnoreCase));
+        if (template is null)
+        {
+            throw new InvalidOperationException($"Template '{name}' not found. Please run 'voyager list' to see all available templates.");
+        }
+        logger.LogInformation("Creating project {newProjectName} from template {name}", newProjectName, name);
     }
 
     public async Task ListTemplates(string endPoint)
@@ -21,7 +28,7 @@ public class NewWorker(
         foreach (var template in templates)
         {
             Console.WriteLine($"Template '{template.ShortName}' from {template.ProjectOrg}/{template.ProjectName}:");
-            Console.WriteLine($"  - Full name: {template.FullName}");
+            Console.WriteLine($"  - Full name: {template.FullName}\n");
             logger.LogTrace("Git repo clone url: {gitRepoCloneUrl}", template.GitRepoCloneUrl);
         }
     }
