@@ -3,10 +3,10 @@
     {
       "ShortName": "class-library",
       "FullName": "Class Library, with unit test project",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/gitrunner.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/scanner.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
-      "ProjectName": "GitRunner"
+      "ProjectName": "Scanner"
     },
     {
       "ShortName": "dotnet-cli-tool-simple",
