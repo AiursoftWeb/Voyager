@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>9.0.4</Version>
+    <Version>9.0.5</Version>
     <TargetFramework>net9.0</TargetFramework>
     <AssemblyName>voyager</AssemblyName>
     <RootNamespace>Aiursoft.Voyager</RootNamespace>
@@ -35,7 +35,7 @@
     <PackageReference Include="Aiursoft.Canon" Version="9.0.1" />
     <PackageReference Include="Aiursoft.CommandFramework" Version="9.0.3" />
     <PackageReference Include="Aiursoft.CSTools" Version="9.0.1" />
-    <PackageReference Include="Aiursoft.GitRunner" Version="9.0.3" />
+    <PackageReference Include="Aiursoft.GitRunner" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

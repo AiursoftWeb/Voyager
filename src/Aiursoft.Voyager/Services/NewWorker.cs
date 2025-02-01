@@ -77,6 +77,10 @@ public class NewWorker(
         // Replace the template.ProjectOrg to orgName and template.ProjectName to projName
         await ReplaceEveryString(path, template.ProjectOrg, orgName, templates.Rules);
         await ReplaceEveryString(path, template.ProjectName, projName, templates.Rules);
+        
+        // Init git and initial commit
+        await workspaceManager.Init(path);
+        await workspaceManager.AddAndCommit(path, $"Initial commit from Voyager. Create a new project based on template '{name}'.");
     }
 
     public async Task ListTemplates(string endPoint)
