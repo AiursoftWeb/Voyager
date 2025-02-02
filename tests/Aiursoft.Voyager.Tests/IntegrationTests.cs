@@ -89,8 +89,13 @@ public class IntegrationTests
         var buildResult = await commandRunner.RunCommandAsync(
             bin: "dotnet",
             arg: "build",
-            path: tempFolder);
-        
+            path: tempFolder,
+            timeout: TimeSpan.FromMinutes(5));
+        if (buildResult.code != 0)
+        {
+            Console.WriteLine(buildResult.error);
+            Console.WriteLine(buildResult.output);
+        }
         Assert.AreEqual(0, buildResult.code);
         
         // Clean
