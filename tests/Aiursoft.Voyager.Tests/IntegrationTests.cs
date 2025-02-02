@@ -53,6 +53,38 @@ public class IntegrationTests
 
     [TestMethod]
     [DataRow("class-library")]
+    [DataRow("web-app-database-crud")]
+    public async Task InvokeProjectCreation(string projectTemplateName)
+    {
+        // Prepare
+        var tempFolder = Path.Combine(Path.GetTempPath(), $"Parser-UT-{Guid.NewGuid()}");
+        if (!Directory.Exists(tempFolder))
+        {
+            Directory.CreateDirectory(tempFolder);
+        }
+        // Run
+        var result = await _program.TestRunAsync([
+            "new",
+            "--path", tempFolder,
+            "--template-short-name", projectTemplateName,
+            "--name", "Contoso.WebProject",
+            "-v"
+        ]);
+        
+        // Assert
+        if (result.ProgramReturn != 0)
+        {
+            Console.WriteLine(result.Error);
+            Console.WriteLine(result.Output);
+        }
+        Assert.AreEqual(0, result.ProgramReturn);
+        
+        // Clean
+        FolderDeleter.DeleteByForce(tempFolder);
+    }
+    
+    [TestMethod]
+    [DataRow("class-library")]
     [DataRow("dotnet-cli-tool-simple")]
     [DataRow("dotnet-cli-tool-configuration")]
     [DataRow("dotnet-cli-tool-service")]
@@ -61,7 +93,7 @@ public class IntegrationTests
     [DataRow("web-app-storage")]
     [DataRow("web-app-client-sdk")]
     [Ignore] // Ignore this because on the CI, the dotnet build command will fail.
-    public async Task InvokeProjectCreation(string projectTemplateName)
+    public async Task InvokeProjectCreationAndBuild(string projectTemplateName)
     {
         // Prepare
         var tempFolder = Path.Combine(Path.GetTempPath(), $"Parser-UT-{Guid.NewGuid()}");
