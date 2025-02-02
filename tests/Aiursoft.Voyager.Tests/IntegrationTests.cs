@@ -73,7 +73,8 @@ public class IntegrationTests
             "new",
             "--path", tempFolder,
             "--template-short-name", projectTemplateName,
-            "--name", "Contoso.WebProject"
+            "--name", "Contoso.WebProject",
+            "-v"
         ]);
         
         // Assert

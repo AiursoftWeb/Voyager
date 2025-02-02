@@ -40,7 +40,8 @@ public class NewWorker(
         {
             Directory.CreateDirectory(path);
         }
-
+        
+        logger.LogTrace("Cloning template from {gitRepoCloneUrl} to {path}", template.GitRepoCloneUrl, path);
         // Clone the repo with depth 1.
         await workspaceManager.Clone(
             path: path,
@@ -75,11 +76,14 @@ public class NewWorker(
         logger.LogTrace("Organization name: {orgName}, Project name: {projName}", orgName, projName);
 
         // Replace the template.ProjectOrg to orgName and template.ProjectName to projName
+        
+        logger.LogTrace("Replacing every string in files under {path} from {template.ProjectOrg} to {orgName} and {template.ProjectName} to {projName}", path, template.ProjectOrg, orgName, template.ProjectName, projName);
         await ReplaceEveryString(path, template.ProjectOrg, orgName, templates.Rules);
         await ReplaceEveryString(path, template.ProjectName, projName, templates.Rules);
         await ReplaceOverrides(path, template.ProjectOrg, orgName, template.ProjectName, projName, templates.Rules);
         
         // Init git and initial commit
+        logger.LogTrace("Initializing git repository at {path}", path);
         await workspaceManager.Init(path);
         await workspaceManager.AddAndCommit(path, $"Initial commit from Voyager. Create a new project based on template '{name}'.");
     }
