@@ -95,6 +95,10 @@
         {
           "Old": "@namespace {ProjectOrg}.{ProjectName}",
           "New": "@namespace {ProjectOrg}.{ProjectName}"
+        },
+        {
+          "Old": "@{ProjectOrg}.{ProjectName}",
+          "New": "@{ProjectOrg}.{ProjectName}"
         }
       ]
     },
