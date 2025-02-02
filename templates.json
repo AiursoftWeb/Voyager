@@ -89,6 +89,10 @@
           "New": "@using {ProjectOrg}.{ProjectName}"
         },
         {
+          "Old": "@model {ProjectOrg}.{ProjectName}",
+          "New": "@model {ProjectOrg}.{ProjectName}"
+        },
+        {
           "Old": "@namespace {ProjectOrg}.{ProjectName}",
           "New": "@namespace {ProjectOrg}.{ProjectName}"
         }
