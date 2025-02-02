@@ -68,7 +68,13 @@
   "Rules": [
     {
       "Extension": ".cs",
-      "DontReplaceWhenLineContains": "using"
+      "DontReplaceWhenLineContains": "using",
+      "ReplaceOverrides": [
+        {
+          "Old": "using {ProjectOrg}.{ProjectName}",
+          "New": "using {ProjectOrg}.{ProjectName}"
+        }
+      ]
     },
     {
       "Extension": ".csproj",

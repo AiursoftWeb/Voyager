@@ -14,6 +14,13 @@ public class Rule
 {
     public required string Extension { get; init; }
     public required string DontReplaceWhenLineContains { get; init; }
+    public required IReadOnlyCollection<Override> ReplaceOverrides { get; init; } = new List<Override>();
+}
+
+public class Override
+{
+    public required string Old { get; init; }
+    public required string New { get; init; }
 }
 
 public class Template

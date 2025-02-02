@@ -77,6 +77,7 @@ public class NewWorker(
         // Replace the template.ProjectOrg to orgName and template.ProjectName to projName
         await ReplaceEveryString(path, template.ProjectOrg, orgName, templates.Rules);
         await ReplaceEveryString(path, template.ProjectName, projName, templates.Rules);
+        await ReplaceOverrides(path, template.ProjectOrg, orgName, template.ProjectName, projName, templates.Rules);
         
         // Init git and initial commit
         await workspaceManager.Init(path);
@@ -94,6 +95,58 @@ public class NewWorker(
             logger.LogTrace("Git repo clone url: {gitRepoCloneUrl}", template.GitRepoCloneUrl);
         }
     }
+    
+    private async Task ReplaceOverrides(
+        string root, 
+        string oldOrg, 
+        string newOrg, 
+        string oldProj, 
+        string newProj,
+        IReadOnlyCollection<Rule> rules)
+    {
+        // 对于所有配置了 ReplaceOverrides 的规则
+        foreach (var rule in rules.Where(r => r.ReplaceOverrides.Any()))
+        {
+            // 只处理扩展名匹配的文件
+            var files = Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories)
+                .Where(f => string.Equals(Path.GetExtension(f), rule.Extension, StringComparison.OrdinalIgnoreCase));
+            foreach (var file in files)
+            {
+                logger.LogTrace("Processing file {file} for override replacement.", file);
+                var lines = await File.ReadAllLinesAsync(file);
+                bool fileChanged = false;
+                // 针对每一行，依次对每个 override 配置进行处理
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    foreach (var ov in rule.ReplaceOverrides)
+                    {
+                        // 根据配置中的占位符构造实际的匹配文本和替换文本
+                        var oldPattern = ov.Old
+                            .Replace("{ProjectOrg}", oldOrg)
+                            .Replace("{ProjectName}", oldProj);
+                        var newPattern = ov.New
+                            .Replace("{ProjectOrg}", newOrg)
+                            .Replace("{ProjectName}", newProj);
+
+                        if (lines[i].Contains(oldPattern))
+                        {
+                            var newLine = lines[i].ReplaceWithUpperLowerRespect(oldPattern, newPattern);
+                            if (!newLine.Equals(lines[i]))
+                            {
+                                lines[i] = newLine;
+                                fileChanged = true;
+                            }
+                        }
+                    }
+                }
+                if (fileChanged)
+                {
+                    await File.WriteAllLinesAsync(file, lines);
+                }
+            }
+        }
+    }
+
 
     private async Task ReplaceEveryString(string path, string source, string target, IReadOnlyCollection<Rule> rules)
     {
