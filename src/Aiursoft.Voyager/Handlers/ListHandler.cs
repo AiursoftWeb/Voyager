@@ -29,9 +29,12 @@ public class ListHandler : ExecutableCommandHandlerBuilder
             .CreateCommandHostBuilder<Startup>(verbose)
             .Build();
 
-        await host.StartAsync();
-
-        var newWorker = host.Services.GetRequiredService<NewWorker>();
+        var newWorker = host
+            .Services
+            .GetRequiredService<IServiceScopeFactory>()
+            .CreateScope()
+            .ServiceProvider
+            .GetRequiredService<NewWorker>();
         await newWorker.ListTemplates(endPoint);
     }
 }

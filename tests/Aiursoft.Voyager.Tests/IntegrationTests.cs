@@ -1,4 +1,7 @@
 ﻿using Aiursoft.CommandFramework;
+using Aiursoft.CommandFramework.Models;
+using Aiursoft.CSTools.Services;
+using Aiursoft.CSTools.Tools;
 using Aiursoft.Voyager.Handlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,8 +10,11 @@ namespace Aiursoft.Voyager.Tests;
 [TestClass]
 public class IntegrationTests
 {
-    private readonly SingleCommandApp<NewHandler> _program = new SingleCommandApp<NewHandler>()
-        .WithDefaultOption(OptionsProvider.TemplateOption);
+    private readonly CommandApp _program = new NestedCommandApp()
+        .WithFeature(new NewHandler())
+        .WithFeature(new ListHandler())
+        .WithGlobalOptions(CommonOptionsProvider.VerboseOption)
+        .WithGlobalOptions(OptionsProvider.TemplatesEndpoint);
 
     [TestMethod]
     public async Task InvokeHelp()
@@ -36,5 +42,58 @@ public class IntegrationTests
     {
         var result = await _program.TestRunAsync([], defaultOption: OptionsProvider.TemplateOption);
         Assert.AreEqual(1, result.ProgramReturn);
+    }
+    
+    [TestMethod]
+    public async Task InvokeTemplatesList()
+    {
+        var result = await _program.TestRunAsync(["list"], defaultOption: OptionsProvider.TemplateOption);
+        Assert.AreEqual(0, result.ProgramReturn);
+    }
+
+    [TestMethod]
+    [DataRow("class-library")]
+    [DataRow("dotnet-cli-tool-simple")]
+    [DataRow("dotnet-cli-tool-configuration")]
+    [DataRow("dotnet-cli-tool-service")]
+    [DataRow("web-app-simple")]
+    [DataRow("web-app-database-crud")]
+    [DataRow("web-app-storage")]
+    [DataRow("web-app-client-sdk")]
+    public async Task InvokeProjectCreation(string projectTemplateName)
+    {
+        // Prepare
+        var tempFolder = Path.Combine(Path.GetTempPath(), $"Parser-UT-{Guid.NewGuid()}");
+        if (!Directory.Exists(tempFolder))
+        {
+            Directory.CreateDirectory(tempFolder);
+        }
+        // Run
+        var result = await _program.TestRunAsync([
+            "new",
+            "--path", tempFolder,
+            "--template-short-name", projectTemplateName,
+            "--name", "Contoso.WebProject"
+        ]);
+        
+        // Assert
+        if (result.ProgramReturn != 0)
+        {
+            Console.WriteLine(result.Error);
+            Console.WriteLine(result.Output);
+        }
+        Assert.AreEqual(0, result.ProgramReturn);
+        
+        // Build
+        var commandRunner = new CommandService();
+        var buildResult = await commandRunner.RunCommandAsync(
+            bin: "dotnet",
+            arg: "build",
+            path: tempFolder);
+        
+        Assert.AreEqual(0, buildResult.code);
+        
+        // Clean
+        FolderDeleter.DeleteByForce(tempFolder);
     }
 }

@@ -171,7 +171,9 @@ public class NewWorker(
                 var lines = await File.ReadAllLinesAsync(file);
                 for (var i = 0; i < lines.Length; i++)
                 {
-                    var skipReplacement = applicableRules.Any(rule => lines[i].Contains(rule.DontReplaceWhenLineContains));
+                    var skipReplacement = applicableRules.Any(rule => 
+                        rule.DontReplaceWhenLineContains == "*" ||
+                        lines[i].Contains(rule.DontReplaceWhenLineContains));
                     if (!skipReplacement)
                     {
                         lines[i] = lines[i].ReplaceWithUpperLowerRespect(source, target);
