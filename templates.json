@@ -71,14 +71,6 @@
       "DontReplaceWhenLineContains": "*",
       "ReplaceOverrides": [
         {
-          "Old": "using {ProjectOrg}.{ProjectName}",
-          "New": "using {ProjectOrg}.{ProjectName}"
-        },
-        {
-          "Old": "namespace {ProjectOrg}.{ProjectName}",
-          "New": "namespace {ProjectOrg}.{ProjectName}"
-        },
-        {
           "Old": "{ProjectOrg}.{ProjectName}",
           "New": "{ProjectOrg}.{ProjectName}"
         }
@@ -89,20 +81,8 @@
       "DontReplaceWhenLineContains": "*",
       "ReplaceOverrides": [
         {
-          "Old": "@using {ProjectOrg}.{ProjectName}",
-          "New": "@using {ProjectOrg}.{ProjectName}"
-        },
-        {
-          "Old": "@model {ProjectOrg}.{ProjectName}",
-          "New": "@model {ProjectOrg}.{ProjectName}"
-        },
-        {
-          "Old": "@namespace {ProjectOrg}.{ProjectName}",
-          "New": "@namespace {ProjectOrg}.{ProjectName}"
-        },
-        {
-          "Old": "@{ProjectOrg}.{ProjectName}",
-          "New": "@{ProjectOrg}.{ProjectName}"
+          "Old": "{ProjectOrg}.{ProjectName}",
+          "New": "{ProjectOrg}.{ProjectName}"
         }
       ]
     },
