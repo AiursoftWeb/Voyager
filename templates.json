@@ -93,6 +93,14 @@
     {
       "Extension": ".config",
       "DontReplaceWhenLineContains": "<add"
+    },
+    {
+      "Extension": ".npmrc",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".json",
+      "DontReplaceWhenLineContains": "*"
     }
   ]
 }
