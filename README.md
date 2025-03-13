@@ -8,7 +8,7 @@
 
 A cli tool helps you create new projects with a template.
 
-## Install
+## Installation
 
 Requirements:
 
