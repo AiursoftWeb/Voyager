@@ -57,6 +57,14 @@
       "ProjectName": "AiurDrive"
     },
     {
+      "ShortName": "web-app-background-job",
+      "FullName": "ASP.NET Core Web Application, with background job service",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/gitmirrorserver.git",
+      "Branch": "master",
+      "ProjectOrg": "Aiursoft",
+      "ProjectName": "GitMirrorServer"
+    },
+    {
       "ShortName": "web-app-client-sdk",
       "FullName": "ASP.NET Core Web Application, with client side application and SDK",
       "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/stathub.git",
