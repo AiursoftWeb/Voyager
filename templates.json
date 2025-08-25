@@ -102,6 +102,13 @@
       ]
     },
     {
+      "Extension": ".gitlab-ci.yml",
+      "DontReplaceWhenLineContains": "*",
+      "ReplaceOverrides": [
+
+      ]
+    },
+    {
       "Extension": ".csproj",
       "DontReplaceWhenLineContains": "PackageReference"
     },
