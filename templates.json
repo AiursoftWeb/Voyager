@@ -49,6 +49,14 @@
       "ProjectName": "FlyClass"
     },
     {
+      "ShortName": "web-app-all-in-one",
+      "FullName": "ASP.NET Core Web Application, with database and CRUD operations, with OIDC, with localization, with file storage...",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/template.git",
+      "Branch": "master",
+      "ProjectOrg": "Aiursoft",
+      "ProjectName": "Template"
+    },
+    {
       "ShortName": "web-app-storage",
       "FullName": "ASP.NET Core Web Application, with user uploading and stroage service",
       "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/aiurdrive.git",
