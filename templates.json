@@ -131,6 +131,10 @@
     {
       "Extension": ".json",
       "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".resx",
+      "DontReplaceWhenLineContains": "*"
     }
   ]
 }
