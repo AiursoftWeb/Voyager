@@ -129,6 +129,34 @@
       "DontReplaceWhenLineContains": "*"
     },
     {
+      "Extension": ".jpg",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".png",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".bmp",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".webp",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".gif",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".svg",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
+      "Extension": ".tiff",
+      "DontReplaceWhenLineContains": "*"
+    },
+    {
       "Extension": ".json",
       "DontReplaceWhenLineContains": "*"
     },
