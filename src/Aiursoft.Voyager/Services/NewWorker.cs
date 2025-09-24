@@ -40,7 +40,7 @@ public class NewWorker(
         {
             Directory.CreateDirectory(path);
         }
-        
+
         logger.LogTrace("Cloning template from {gitRepoCloneUrl} to {path}", template.GitRepoCloneUrl, path);
         // Clone the repo with depth 1.
         await workspaceManager.Clone(
@@ -76,12 +76,12 @@ public class NewWorker(
         logger.LogTrace("Organization name: {orgName}, Project name: {projName}", orgName, projName);
 
         // Replace the template.ProjectOrg to orgName and template.ProjectName to projName
-        
+
         logger.LogTrace("Replacing every string in files under {path} from {template.ProjectOrg} to {orgName} and {template.ProjectName} to {projName}", path, template.ProjectOrg, orgName, template.ProjectName, projName);
         await ReplaceEveryString(path, template.ProjectOrg, orgName, templates.Rules);
         await ReplaceEveryString(path, template.ProjectName, projName, templates.Rules);
         await ReplaceOverrides(path, template.ProjectOrg, orgName, template.ProjectName, projName, templates.Rules);
-        
+
         // Init git and initial commit
         logger.LogTrace("Initializing git repository at {path}", path);
         await workspaceManager.Init(path);
@@ -99,12 +99,12 @@ public class NewWorker(
             logger.LogTrace("Git repo clone url: {gitRepoCloneUrl}", template.GitRepoCloneUrl);
         }
     }
-    
+
     private async Task ReplaceOverrides(
-        string root, 
-        string oldOrg, 
-        string newOrg, 
-        string oldProj, 
+        string root,
+        string oldOrg,
+        string newOrg,
+        string oldProj,
         string newProj,
         IReadOnlyCollection<Rule> rules)
     {
@@ -172,18 +172,24 @@ public class NewWorker(
 
             if (applicableRules.Count != 0)
             {
+                var replaced = false;
                 var lines = await File.ReadAllLinesAsync(file);
                 for (var i = 0; i < lines.Length; i++)
                 {
-                    var skipReplacement = applicableRules.Any(rule => 
+                    var skipReplacement = applicableRules.Any(rule =>
                         rule.DontReplaceWhenLineContains == "*" ||
                         lines[i].Contains(rule.DontReplaceWhenLineContains));
                     if (!skipReplacement)
                     {
                         lines[i] = lines[i].ReplaceWithUpperLowerRespect(source, target);
+                        replaced = true;
                     }
                 }
-                await File.WriteAllLinesAsync(file, lines);
+
+                if (replaced)
+                {
+                    await File.WriteAllLinesAsync(file, lines);
+                }
             }
             else
             {
