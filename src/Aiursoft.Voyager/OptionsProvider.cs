@@ -21,7 +21,7 @@ public class OptionsProvider
     
     public static readonly Option<string> TemplatesEndpoint = new(
         aliases: ["--templates-endpoint", "-p"],
-        getDefaultValue: () => "https://gitlab.aiursoft.cn/aiursoft/voyager/-/raw/master/templates.json",
+        getDefaultValue: () => "https://gitlab.aiursoft.com/aiursoft/voyager/-/raw/master/templates.json",
         description: "The endpoint to fetch templates from.")
     {
         IsRequired = false,

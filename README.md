@@ -1,10 +1,10 @@
 # Voyager
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.cn/aiursoft/Voyager/-/blob/master/LICENSE)
-[![Pipeline stat](https://gitlab.aiursoft.cn/aiursoft/Voyager/badges/master/pipeline.svg)](https://gitlab.aiursoft.cn/aiursoft/Voyager/-/pipelines)
-[![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/Voyager/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/Voyager/-/pipelines)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/blob/master/LICENSE)
+[![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
+[![Test Coverage](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.Voyager.svg)](https://www.nuget.org/packages/Aiursoft.Voyager/)
-[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/Voyager.svg)](https://gitlab.aiursoft.cn/aiursoft/Voyager/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.com/aiursoft/Voyager.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/commits/master?ref_type=heads)
 
 A cli tool helps you create new projects with a template.
 
@@ -36,7 +36,7 @@ Usage:
 Options:
   --path <path>                                               The path to the project. [default: .]
   -t, --template-short-name <template-short-name> (REQUIRED)  The short name of the template to use. Run `voyager list` to see all available templates.
-  -p, --templates-endpoint <templates-endpoint>               The endpoint to fetch templates from. [default: https://gitlab.aiursoft.cn/aiursoft/voyager/-/raw/master/templates.json]
+  -p, --templates-endpoint <templates-endpoint>               The endpoint to fetch templates from. [default: https://gitlab.aiursoft.com/aiursoft/voyager/-/raw/master/templates.json]
   -n, --name <name>                                           The name of the new project. [default: Temp]
   -v, --verbose                                               Show detailed log
   -?, -h, --help                                              Show help and usage information

@@ -3,7 +3,7 @@
     {
       "ShortName": "class-library",
       "FullName": "Class Library, with unit test project",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/scanner.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/scanner.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Scanner"
@@ -11,7 +11,7 @@
     {
       "ShortName": "dotnet-cli-tool-simple",
       "FullName": ".NET CLI global CLI application, single command.",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/httping.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/httping.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Httping"
@@ -19,7 +19,7 @@
     {
       "ShortName": "dotnet-cli-tool-configuration",
       "FullName": ".NET CLI global CLI application, multiple commands, with configuration system",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/anduin/happyrecorder.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/anduin/happyrecorder.git",
       "Branch": "master",
       "ProjectOrg": "Anduin",
       "ProjectName": "HappyRecorder"
@@ -27,7 +27,7 @@
     {
       "ShortName": "dotnet-cli-tool-service",
       "FullName": ".NET CLI global CLI application, running with host service",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/static.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/static.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Static"
@@ -35,7 +35,7 @@
     {
       "ShortName": "web-app-simple",
       "FullName": "ASP.NET Core Web Application, with front-end packages and simple back-end",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/tracer.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/tracer.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Tracer"
@@ -43,7 +43,7 @@
     {
       "ShortName": "web-app-database-crud",
       "FullName": "ASP.NET Core Web Application, with database and CRUD operations",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/anduin/flyclass.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/anduin/flyclass.git",
       "Branch": "master",
       "ProjectOrg": "Anduin",
       "ProjectName": "FlyClass"
@@ -51,7 +51,7 @@
     {
       "ShortName": "web-app-all-in-one",
       "FullName": "ASP.NET Core Web Application, with database and CRUD operations, with OIDC, with localization, with file storage...",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/template.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/template.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Template"
@@ -59,7 +59,7 @@
     {
       "ShortName": "web-app-storage",
       "FullName": "ASP.NET Core Web Application, with user uploading and stroage service",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/aiurdrive.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/aiurdrive.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "AiurDrive"
@@ -67,7 +67,7 @@
     {
       "ShortName": "web-app-background-job",
       "FullName": "ASP.NET Core Web Application, with background job service",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/gitmirrorserver.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/gitmirrorserver.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "GitMirrorServer"
@@ -75,7 +75,7 @@
     {
       "ShortName": "web-app-client-sdk",
       "FullName": "ASP.NET Core Web Application, with client side application and SDK",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.cn/aiursoft/stathub.git",
+      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/stathub.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "StatHub"
