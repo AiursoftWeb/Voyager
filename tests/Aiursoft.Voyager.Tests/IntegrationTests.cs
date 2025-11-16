@@ -3,7 +3,6 @@ using Aiursoft.CommandFramework.Models;
 using Aiursoft.CSTools.Services;
 using Aiursoft.CSTools.Tools;
 using Aiursoft.Voyager.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Aiursoft.Voyager.Tests;
 
@@ -43,7 +42,7 @@ public class IntegrationTests
         var result = await _program.TestRunAsync([], defaultOption: OptionsProvider.TemplateOption);
         Assert.AreEqual(1, result.ProgramReturn);
     }
-    
+
     [TestMethod]
     public async Task InvokeTemplatesList()
     {
@@ -70,25 +69,26 @@ public class IntegrationTests
             "--name", "Contoso.WebProject",
             "-v"
         ]);
-        
+
         // Assert
         if (result.ProgramReturn != 0)
         {
-            Console.WriteLine(result.Error);
-            Console.WriteLine(result.Output);
+            Console.WriteLine(result.StdErr);
+            Console.WriteLine(result.StdOut);
         }
         Assert.AreEqual(0, result.ProgramReturn);
-        
+
         // Clean
         FolderDeleter.DeleteByForce(tempFolder);
     }
-    
+
     [TestMethod]
     [DataRow("class-library")]
     [DataRow("dotnet-cli-tool-simple")]
     [DataRow("dotnet-cli-tool-configuration")]
     [DataRow("dotnet-cli-tool-service")]
     [DataRow("web-app-simple")]
+    [DataRow("web-app-all-in-one")]
     [DataRow("web-app-database-crud")]
     [DataRow("web-app-storage")]
     [DataRow("web-app-client-sdk")]
@@ -109,15 +109,15 @@ public class IntegrationTests
             "--name", "Contoso.WebProject",
             "-v"
         ]);
-        
+
         // Assert
         if (result.ProgramReturn != 0)
         {
-            Console.WriteLine(result.Error);
-            Console.WriteLine(result.Output);
+            Console.WriteLine(result.StdErr);
+            Console.WriteLine(result.StdOut);
         }
         Assert.AreEqual(0, result.ProgramReturn);
-        
+
         // Build
         var commandRunner = new CommandService();
         var buildResult = await commandRunner.RunCommandAsync(
@@ -131,7 +131,7 @@ public class IntegrationTests
             Console.WriteLine(buildResult.output);
         }
         Assert.AreEqual(0, buildResult.code);
-        
+
         // Clean
         FolderDeleter.DeleteByForce(tempFolder);
     }

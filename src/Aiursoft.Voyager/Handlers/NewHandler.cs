@@ -1,5 +1,4 @@
 using System.CommandLine;
-using System.CommandLine.Invocation;
 using Aiursoft.CommandFramework.Framework;
 using Aiursoft.CommandFramework.Models;
 using Aiursoft.CommandFramework.Services;
@@ -23,7 +22,7 @@ public class NewHandler : ExecutableCommandHandlerBuilder
         OptionsProvider.NewProjectNameOption,
         CommonOptionsProvider.VerboseOption
     ];
-    
+
     protected override async Task Execute(ParseResult context)
     {
         var path = context.GetValue(OptionsProvider.PathOption)!;
@@ -31,7 +30,7 @@ public class NewHandler : ExecutableCommandHandlerBuilder
         var endPoint = context.GetValue(OptionsProvider.TemplatesEndpoint)!;
         var newProjectName = context.GetValue(OptionsProvider.NewProjectNameOption)!;
         var verbose = context.GetValue(CommonOptionsProvider.VerboseOption);
-        
+
         var contentRoot = Path.GetFullPath(path);
         var host = ServiceBuilder
             .CreateCommandHostBuilder<Startup>(verbose)

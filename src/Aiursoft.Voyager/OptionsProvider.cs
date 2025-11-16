@@ -5,38 +5,41 @@ namespace Aiursoft.Voyager;
 public class OptionsProvider
 {
     public static readonly Option<string> PathOption = new(
-        name: "--path",
-        getDefaultValue: () => ".",
-        description: "The path to the project.")
+        name: "--path")
     {
-        IsRequired = false,
+        DefaultValueFactory = _ => ".",
+        Description = "The path to the project.",
+        Required = false,
     };
 
     public static readonly Option<string> TemplateOption = new(
-        aliases: ["--template-short-name", "-t"],
-        description: "The short name of the template to use. Run `voyager list` to see all available templates.")
+        name: "--template-short-name",
+        aliases: ["-t"])
     {
-        IsRequired = true,
+        Description = "The short name of the template to use. Run `voyager list` to see all available templates.",
+        Required = true,
     };
-    
+
     public static readonly Option<string> TemplatesEndpoint = new(
-        aliases: ["--templates-endpoint", "-p"],
-        getDefaultValue: () => "https://gitlab.aiursoft.com/aiursoft/voyager/-/raw/master/templates.json",
-        description: "The endpoint to fetch templates from.")
+        name: "--templates-endpoint",
+        aliases: ["-p"])
     {
-        IsRequired = false,
+        DefaultValueFactory = _ => "https://gitlab.aiursoft.com/aiursoft/voyager/-/raw/master/templates.json",
+        Description = "The endpoint to fetch templates from.",
+        Required = false,
     };
-    
+
     public static readonly Option<string> NewProjectNameOption = new(
-        aliases: ["--name", "-n"],
-        getDefaultValue: () =>
+        name: "--name",
+        aliases: ["-n"])
+    {
+        DefaultValueFactory = _ =>
         {
             var name = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
             Console.WriteLine($"Didn't pass the argument '-n', using the current directory name '{name}' as the project name.");
             return name;
         },
-        description: "The name of the new project.")
-    {
-        IsRequired = false,
+        Description = "The name of the new project.",
+        Required = false,
     };
 }

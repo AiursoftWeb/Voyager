@@ -1,5 +1,4 @@
 using System.CommandLine;
-using System.CommandLine.Invocation;
 using Aiursoft.CommandFramework.Framework;
 using Aiursoft.CommandFramework.Models;
 using Aiursoft.CommandFramework.Services;
@@ -19,7 +18,7 @@ public class ListHandler : ExecutableCommandHandlerBuilder
         OptionsProvider.TemplatesEndpoint,
         CommonOptionsProvider.VerboseOption
     ];
-    
+
     protected override async Task Execute(ParseResult context)
     {
         var endPoint = context.GetValue(OptionsProvider.TemplatesEndpoint)!;
