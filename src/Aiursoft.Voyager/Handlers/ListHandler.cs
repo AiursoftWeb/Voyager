@@ -20,10 +20,10 @@ public class ListHandler : ExecutableCommandHandlerBuilder
         CommonOptionsProvider.VerboseOption
     ];
     
-    protected override async Task Execute(InvocationContext context)
+    protected override async Task Execute(ParseResult context)
     {
-        var endPoint = context.ParseResult.GetValueForOption(OptionsProvider.TemplatesEndpoint)!;
-        var verbose = context.ParseResult.GetValueForOption(CommonOptionsProvider.VerboseOption);
+        var endPoint = context.GetValue(OptionsProvider.TemplatesEndpoint)!;
+        var verbose = context.GetValue(CommonOptionsProvider.VerboseOption);
 
         var host = ServiceBuilder
             .CreateCommandHostBuilder<Startup>(verbose)

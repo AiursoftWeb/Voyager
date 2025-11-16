@@ -24,13 +24,13 @@ public class NewHandler : ExecutableCommandHandlerBuilder
         CommonOptionsProvider.VerboseOption
     ];
     
-    protected override async Task Execute(InvocationContext context)
+    protected override async Task Execute(ParseResult context)
     {
-        var path = context.ParseResult.GetValueForOption(OptionsProvider.PathOption)!;
-        var name = context.ParseResult.GetValueForOption(OptionsProvider.TemplateOption)!;
-        var endPoint = context.ParseResult.GetValueForOption(OptionsProvider.TemplatesEndpoint)!;
-        var newProjectName = context.ParseResult.GetValueForOption(OptionsProvider.NewProjectNameOption)!;
-        var verbose = context.ParseResult.GetValueForOption(CommonOptionsProvider.VerboseOption);
+        var path = context.GetValue(OptionsProvider.PathOption)!;
+        var name = context.GetValue(OptionsProvider.TemplateOption)!;
+        var endPoint = context.GetValue(OptionsProvider.TemplatesEndpoint)!;
+        var newProjectName = context.GetValue(OptionsProvider.NewProjectNameOption)!;
+        var verbose = context.GetValue(CommonOptionsProvider.VerboseOption);
         
         var contentRoot = Path.GetFullPath(path);
         var host = ServiceBuilder
