@@ -220,9 +220,9 @@ public class NewWorker(
 
             // Rename this directory if its name contains the source substring.
             var dirName = Path.GetFileName(subDir);
-            if (dirName.Contains(source))
+            var newDirName = dirName.ReplaceWithUpperLowerRespect(source, target);
+            if (dirName != newDirName)
             {
-                var newDirName = dirName.Replace(source, target);
                 var parentDir = Path.GetDirectoryName(subDir);
                 if (string.IsNullOrEmpty(parentDir))
                 {
@@ -247,9 +247,15 @@ public class NewWorker(
         var files = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
         foreach (var file in files)
         {
-            var newFile = file.Replace(source, target);
-            logger.LogTrace("Renaming file {file} to {newFile}", file, newFile);
-            File.Move(file, newFile);
+            var fileName = Path.GetFileName(file);
+            var newFileName = fileName.ReplaceWithUpperLowerRespect(source, target);
+            if (fileName != newFileName)
+            {
+                var directory = Path.GetDirectoryName(file);
+                var newFile = Path.Combine(directory!, newFileName);
+                logger.LogTrace("Renaming file {file} to {newFile}", file, newFile);
+                File.Move(file, newFile);
+            }
         }
 
         return Task.CompletedTask;

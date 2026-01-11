@@ -83,6 +83,37 @@ public class IntegrationTests
     }
 
     [TestMethod]
+    public async Task TestParentPathConflict()
+    {
+        // Prepare
+        // The 'class-library' template uses 'Aiursoft' as ProjectOrg.
+        // We create a path that contains 'Aiursoft' in the parent directory.
+        var tempRoot = Path.Combine(Path.GetTempPath(), $"Aiursoft-Conflict-Test-{Guid.NewGuid()}");
+        var projectPath = Path.Combine(tempRoot, "MyProject");
+        Directory.CreateDirectory(projectPath);
+
+        // Run
+        var result = await _program.TestRunAsync([
+            "new",
+            "--path", projectPath,
+            "--template-short-name", "class-library",
+            "--name", "Contoso.WebProject",
+            "-v"
+        ]);
+
+        // Assert
+        if (result.ProgramReturn != 0)
+        {
+            Console.WriteLine(result.StdErr);
+            Console.WriteLine(result.StdOut);
+        }
+        Assert.AreEqual(0, result.ProgramReturn);
+
+        // Clean
+        FolderDeleter.DeleteByForce(tempRoot);
+    }
+
+    [TestMethod]
     [DataRow("class-library")]
     [DataRow("dotnet-cli-tool-simple")]
     [DataRow("dotnet-cli-tool-configuration")]
