@@ -51,7 +51,7 @@
     {
       "ShortName": "web-app-all-in-one",
       "FullName": "ASP.NET Core Web Application, with database and CRUD operations, with OIDC, with localization, with file storage...",
-      "GitRepoCloneUrl": "https://gitlab.aiursoft.com/aiursoft/template.git",
+      "GitRepoCloneUrl": "https://github.com/AiursoftWeb/Template.git",
       "Branch": "master",
       "ProjectOrg": "Aiursoft",
       "ProjectName": "Template"
@@ -105,16 +105,12 @@
     {
       "Extension": ".yaml",
       "DontReplaceWhenLineContains": "*",
-      "ReplaceOverrides": [
-
-      ]
+      "ReplaceOverrides": []
     },
     {
       "Extension": ".gitlab-ci.yml",
       "DontReplaceWhenLineContains": "*",
-      "ReplaceOverrides": [
-
-      ]
+      "ReplaceOverrides": []
     },
     {
       "Extension": ".csproj",
