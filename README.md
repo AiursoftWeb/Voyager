@@ -1,6 +1,6 @@
 # Voyager
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/blob/master/LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/voyager/blob/master/LICENSE)
 [![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.Voyager.svg)](https://www.nuget.org/packages/Aiursoft.Voyager/)
