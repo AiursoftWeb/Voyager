@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\src\Aiursoft.Voyager\Aiursoft.Voyager.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="../../templates.json" Link="templates.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="assets\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
