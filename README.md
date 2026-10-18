@@ -36,7 +36,7 @@ Usage:
 Options:
   --path <path>                                               The path to the project. [default: .]
   -t, --template-short-name <template-short-name> (REQUIRED)  The short name of the template to use. Run `voyager list` to see all available templates.
-  -p, --templates-endpoint <templates-endpoint>               The endpoint to fetch templates from. [default: https://gitlab.aiursoft.com/aiursoft/voyager/-/raw/master/templates.json]
+  -p, --templates-endpoint <templates-endpoint>               The endpoint to fetch templates from. [default: https://github.com/AiursoftWeb/Voyager/raw/refs/heads/master/templates.json]
   -n, --name <name>                                           The name of the new project. [default: Temp]
   -v, --verbose                                               Show detailed log
   -?, -h, --help                                              Show help and usage information

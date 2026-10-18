@@ -1,4 +1,5 @@
-﻿using Aiursoft.CommandFramework;
+using System.Net;
+using Aiursoft.CommandFramework;
 using Aiursoft.CommandFramework.Models;
 using Aiursoft.CSTools.Services;
 using Aiursoft.CSTools.Tools;
@@ -9,6 +10,64 @@ namespace Aiursoft.Voyager.Tests;
 [TestClass]
 public class IntegrationTests
 {
+    private static HttpListener? _templatesServer;
+    private static Task? _templatesRequests;
+    private static string _templatesEndpoint = string.Empty;
+
+    [ClassInitialize]
+    public static void StartTemplatesServer(TestContext context)
+    {
+        var content = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "templates.json"));
+        // Bind directly and retry collisions without reserving a separate socket.
+        for (var attempt = 0; attempt < 10; attempt++)
+        {
+            var listener = new HttpListener();
+            var prefix = $"http://127.0.0.1:{Random.Shared.Next(20000, 60000)}/";
+            listener.Prefixes.Add(prefix);
+            try
+            {
+                listener.Start();
+                _templatesServer = listener;
+                _templatesEndpoint = prefix + "templates.json";
+                break;
+            }
+            catch (HttpListenerException) when (attempt < 9)
+            {
+                listener.Close();
+            }
+        }
+
+        _templatesRequests = Task.Run(async () =>
+        {
+            try
+            {
+                while (_templatesServer!.IsListening)
+                {
+                    var request = await _templatesServer.GetContextAsync();
+                    request.Response.ContentType = "application/json";
+                    request.Response.ContentLength64 = content.Length;
+                    await request.Response.OutputStream.WriteAsync(content);
+                    request.Response.Close();
+                }
+            }
+            catch (Exception ex) when (!_templatesServer!.IsListening &&
+                                       ex is HttpListenerException or ObjectDisposedException)
+            {
+                // Closing the listener ends the pending request during cleanup.
+            }
+        });
+    }
+
+    [ClassCleanup]
+    public static async Task StopTemplatesServer()
+    {
+        _templatesServer?.Close();
+        if (_templatesRequests != null)
+        {
+            await _templatesRequests;
+        }
+    }
+
     private readonly CommandApp _program = new NestedCommandApp()
         .WithFeature(new NewHandler())
         .WithFeature(new ListHandler())
@@ -46,7 +105,7 @@ public class IntegrationTests
     [TestMethod]
     public async Task InvokeTemplatesList()
     {
-        var result = await _program.TestRunAsync(["list"], defaultOption: OptionsProvider.TemplateOption);
+        var result = await _program.TestRunAsync(["list", "--templates-endpoint", _templatesEndpoint], defaultOption: OptionsProvider.TemplateOption);
         Assert.AreEqual(0, result.ProgramReturn);
     }
 
@@ -64,6 +123,7 @@ public class IntegrationTests
         // Run
         var result = await _program.TestRunAsync([
             "new",
+            "--templates-endpoint", _templatesEndpoint,
             "--path", tempFolder,
             "--template-short-name", projectTemplateName,
             "--name", "Contoso.WebProject",
@@ -95,6 +155,7 @@ public class IntegrationTests
         // Run
         var result = await _program.TestRunAsync([
             "new",
+            "--templates-endpoint", _templatesEndpoint,
             "--path", projectPath,
             "--template-short-name", "class-library",
             "--name", "Contoso.WebProject",
@@ -135,6 +196,7 @@ public class IntegrationTests
         // Run
         var result = await _program.TestRunAsync([
             "new",
+            "--templates-endpoint", _templatesEndpoint,
             "--path", tempFolder,
             "--template-short-name", projectTemplateName,
             "--name", "Contoso.WebProject",
