@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>10.0.51</Version>
+    <Version>10.0.52</Version>
     <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>voyager</AssemblyName>
     <RootNamespace>Aiursoft.Voyager</RootNamespace>
@@ -23,9 +23,9 @@
     <PackageId>Aiursoft.Voyager</PackageId>
     <PackageTags>cli nuget dotnet tool new project template</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://gitlab.aiursoft.com/Aiursoft/Voyager</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AiursoftWeb/voyager</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://gitlab.aiursoft.com/Aiursoft/Voyager</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AiursoftWeb/voyager</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
