@@ -3,6 +3,7 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/voyager/blob/master/LICENSE)
 [![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.com/aiursoft/Voyager/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/Voyager/-/pipelines)
+[![S360 compliance](https://s360.aiursoft.com/badge.svg?project=aiursoft%2Fvoyager)](https://s360.aiursoft.com/SupplyChain?tab=projects&project=aiursoft%2Fvoyager&scope=baseline&ecosystem=all)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.Voyager.svg)](https://www.nuget.org/packages/Aiursoft.Voyager/)
 [![Man hours](https://manhours.aiursoft.com/r/github.com/aiursoftweb/Voyager.svg)](https://manhours.aiursoft.com/r/github.com/aiursoftweb/Voyager.html)
 
